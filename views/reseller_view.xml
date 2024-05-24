@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- form view for a openstack reseller -->
+        <record id="view_openstack_reseller_form" model="ir.ui.view">
+            <field name="name">openstack.reseller.form</field>
+            <field name="model">openstack.reseller</field>
+            <field name="arch" type="xml">
+                <form string="OpenStack Reseller">
+                    <group col="4">
+                        <field name="partner" />
+                        <field name="tier" />
+                        <field name="demo_project" />
+                    </group>
+                    <group col="4">
+                        <field name="hide_billing" />
+                        <field name="alternative_billing_url" />
+                        <field name="hide_support" />
+                        <field name="alternative_support_url" />
+                    </group>
+                    <group col="4">
+                        <field name="create_date" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- tree view for all openstack resellers -->
+        <record id="view_openstack_reseller_tree" model="ir.ui.view">
+            <field name="name">openstack.reseller.tree</field>
+            <field name="model">openstack.reseller</field>
+            <field name="arch" type="xml">
+                <tree string="OpenStack Resellers">
+                    <field name="partner" />
+                    <field name="tier" />
+                    <field name="demo_project" />
+                    <field name="create_date" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search functionality on resellers -->
+        <record id="view_openstack_reseller_filter" model="ir.ui.view">
+            <field name="name">openstack.reseller.select</field>
+            <field name="model">openstack.reseller</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Reseller">
+                    <field name="partner" />
+                    <field name="tier" />
+                    <field name="demo_project" />
+                </search>
+            </field>
+        </record>
+
+        <!-- action to open the openstack reseller list -->
+        <record id="action_openstack_reseller_form" model="ir.actions.act_window">
+            <field name="name">OpenStack Resellers</field>
+            <field name="res_model">openstack.reseller</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu item for openstack reseller -->
+        <menuitem
+            action="action_openstack_reseller_form"
+            id="menu_action_openstack_reseller_form"
+            parent="menu_openstack_main" sequence="7" />
+
+        <!-- form view for a openstack reseller_tier -->
+        <record id="view_openstack_reseller_tier_form" model="ir.ui.view">
+            <field name="name">openstack.reseller.tier.form</field>
+            <field name="model">openstack.reseller.tier</field>
+            <field name="arch" type="xml">
+                <form string="OpenStack Reseller Tier">
+                    <group col="4">
+                        <field name="name" />
+                        <field name="min_usage_threshold" />
+                    </group>
+                    <group col="4">
+                        <field name="discount_percent" />
+                        <field name="discount_product" />
+                    </group>
+                    <group col="4">
+                        <field name="free_support_hours" />
+                        <field name="free_monthly_credit_product" />
+                        <field name="free_monthly_credit" />
+                    </group>
+                    <group col="4">
+                        <field name="create_date" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- tree view for all openstack reseller_tier -->
+        <record id="view_openstack_reseller_tier_tree" model="ir.ui.view">
+            <field name="name">openstack.reseller.tier.tree</field>
+            <field name="model">openstack.reseller.tier</field>
+            <field name="arch" type="xml">
+                <tree string="OpenStack Reseller Tiers">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- action to open the openstack reseller_tier list -->
+        <record id="action_openstack_reseller_tier_form" model="ir.actions.act_window">
+            <field name="name">OpenStack Reseller Tiers</field>
+            <field name="res_model">openstack.reseller.tier</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu item for openstack reseller_tier -->
+        <menuitem
+            action="action_openstack_reseller_tier_form"
+            id="menu_action_openstack_reseller_tier_form"
+            parent="menu_openstack_configuration" sequence="3" />
+
+    </data>
+</odoo>

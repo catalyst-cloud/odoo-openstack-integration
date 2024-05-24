@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record model="ir.module.category" id="module_category_openstack">
+            <field name="name">OpenStack Services</field>
+        </record>
+
+        <record id="group_openstack_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="module_category_openstack" />
+        </record>
+        <record id="group_openstack_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_category_openstack" />
+            <field name="implied_ids" eval="[(4, ref('group_openstack_user'))]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Add project fields to an account move -->
+        <record id="view_order_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="arch" type="xml">
+                <data>
+
+                    <xpath expr='//page[@name="other_information"]' position="after">
+                        <page
+                            string="OpenStack"
+                            groups="openstack_integration.group_openstack_user,openstack_integration.group_openstack_manager">
+                            <group>
+                                <field name="os_project" string="OS Project" />
+                                <field name="os_is_cloud_framework_agreement_sale_order" string="CFA Sale Order" />
+                            </group>
+                        </page>
+                    </xpath>
+
+                    <xpath expr="//page[@name='order_lines']/field/tree/field[@name='product_id']" position="before">
+                        <field name="os_project" optional="hide" string="OS Project" groups="openstack_integration.group_openstack_user,openstack_integration.group_openstack_manager" />
+                    </xpath>
+
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>

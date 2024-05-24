@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- form view for a openstack grant -->
+        <record id="view_openstack_grant_form" model="ir.ui.view">
+            <field name="name">openstack.grant.form</field>
+            <field name="model">openstack.grant</field>
+            <field name="arch" type="xml">
+                <form string="OpenStack Grant">
+                    <group col="4">
+                        <field name="grant_type" />
+                        <field name="project" />
+                        <field name="voucher_code" />
+                    </group>
+                    <group col="4">
+                        <field name="start_date" />
+                        <field name="expiry_date" />
+                        <field name="value" />
+                    </group>
+                    <group col="4">
+                        <field name="create_date" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- tree view for all openstack grants -->
+        <record id="view_openstack_grant_tree" model="ir.ui.view">
+            <field name="name">openstack.grant.tree</field>
+            <field name="model">openstack.grant</field>
+            <field name="arch" type="xml">
+                <tree string="OpenStack Grants">
+                    <field name="voucher_code" />
+                    <field name="project" />
+                    <field name="grant_type" />
+                    <field name="start_date" />
+                    <field name="expiry_date" />
+                    <field name="value" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search functionality on grants -->
+        <record id="view_openstack_grant_filter" model="ir.ui.view">
+            <field name="name">openstack.grant.select</field>
+            <field name="model">openstack.grant</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Grant">
+                    <field name="project" />
+                    <field name="voucher_code" />
+                    <field name="grant_type" />
+                </search>
+            </field>
+        </record>
+
+        <!-- action to open the openstack grant list -->
+        <record id="action_openstack_grant_form" model="ir.actions.act_window">
+            <field name="name">OpenStack Grants</field>
+            <field name="res_model">openstack.grant</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu item for openstack grant -->
+        <menuitem
+            action="action_openstack_grant_form"
+            id="menu_action_openstack_grant_form"
+            parent="menu_openstack_discounts" sequence="1" />
+
+        <!-- form view for a openstack grant type -->
+        <record id="view_openstack_grant_type_form" model="ir.ui.view">
+            <field name="name">openstack.grant.type.form</field>
+            <field name="model">openstack.grant.type</field>
+            <field name="arch" type="xml">
+                <form string="OpenStack Grant Types">
+                    <group col="4">
+                        <field name="name" />
+                        <field name="only_on_group_root" />
+                        <!-- <field name="only_for_products" />
+                        <field name="only_for_product_categories" /> -->
+                    </group>
+                    <group col="4">
+                        <field name="product" />
+                        <field name="create_date" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- tree view for all openstack grant type -->
+        <record id="view_openstack_grant_type_tree" model="ir.ui.view">
+            <field name="name">openstack.grant.type.tree</field>
+            <field name="model">openstack.grant.type</field>
+            <field name="arch" type="xml">
+                <tree string="OpenStack Grant Types">
+                    <field name="name" />
+                    <field name="product" />
+                    <field name="only_on_group_root" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- action to open the openstack grant type list -->
+        <record id="action_openstack_grant_type_form" model="ir.actions.act_window">
+            <field name="name">OpenStack Grant Types</field>
+            <field name="res_model">openstack.grant.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu item for openstack grant type -->
+        <menuitem
+            action="action_openstack_grant_type_form"
+            id="menu_action_openstack_grant_type_form"
+            parent="menu_openstack_configuration" sequence="1" />
+
+    </data>
+</odoo>

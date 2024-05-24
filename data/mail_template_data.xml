@@ -1,0 +1,839 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- This mail template WILL revert when you upgrade the addon:
+         if you want to change it, change this source (or work on a copy) -->
+    <data>
+        <!--Email template -->
+        <record id="email_template_openstack_invoice" model="mail.template">
+            <field name="name">Invoice: Send by email (OpenStack with CSV)</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="email_from">${(object.invoice_user_id.email_formatted or user.email_formatted) |safe}</field>
+            <field name="partner_to">${object.get_email_to()}</field>
+            <field name="subject">${ctx.subject}</field>
+            <field name="body_html" type="html">
+                <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+                % if ctx.email_type == 'credit_card':
+
+                <head>
+                <title>
+                </title>
+                <!--[if !mso]><!-->
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <!--<![endif]-->
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <style type="text/css">
+                    #outlook a {
+                    padding: 0;
+                    }
+
+                    body {
+                    margin: 0;
+                    padding: 0;
+                    -webkit-text-size-adjust: 100%;
+                    -ms-text-size-adjust: 100%;
+                    }
+
+                    table,
+                    td {
+                    border-collapse: collapse;
+                    mso-table-lspace: 0pt;
+                    mso-table-rspace: 0pt;
+                    }
+
+                    img {
+                    border: 0;
+                    height: auto;
+                    line-height: 100%;
+                    outline: none;
+                    text-decoration: none;
+                    -ms-interpolation-mode: bicubic;
+                    }
+
+                    p {
+                    display: block;
+                    margin: 13px 0;
+                    }
+                </style>
+                <!--[if mso]>
+                        <noscript>
+                        <xml>
+                        <o:OfficeDocumentSettings>
+                        <o:AllowPNG/>
+                        <o:PixelsPerInch>96</o:PixelsPerInch>
+                        </o:OfficeDocumentSettings>
+                        </xml>
+                        </noscript>
+                        <![endif]-->
+                <!--[if lte mso 11]>
+                        <style type="text/css">
+                        .mj-outlook-group-fix { width:100% !important; }
+                        </style>
+                        <![endif]-->
+                <!--[if !mso]><!-->
+                <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet" type="text/css" />
+                <style type="text/css">
+                    @import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700);
+                </style>
+                <!--<![endif]-->
+                <style type="text/css">
+                    @media only screen and (min-width:480px) {
+                    .mj-column-per-100 {
+                        width: 100% !important;
+                        max-width: 100%;
+                    }
+
+                    .mj-column-px-500 {
+                        width: 500px !important;
+                        max-width: 500px;
+                    }
+                    }
+                </style>
+                <style media="screen and (min-width:480px)">
+                    .moz-text-html .mj-column-per-100 {
+                    width: 100% !important;
+                    max-width: 100%;
+                    }
+
+                    .moz-text-html .mj-column-px-500 {
+                    width: 500px !important;
+                    max-width: 500px;
+                    }
+                </style>
+                <style type="text/css">
+                    @media only screen and (max-width:480px) {
+                    table.mj-full-width-mobile {
+                        width: 100% !important;
+                    }
+
+                    td.mj-full-width-mobile {
+                        width: auto !important;
+                    }
+                    }
+                </style>
+                </head>
+
+                <body style="word-spacing:normal;background-color:#ffffff;">
+                <div style="background-color:#ffffff;">
+                    <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" bgcolor="#fafafa" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                    <div style="background:#fafafa;background-color:#fafafa;margin:0px auto;max-width:600px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#fafafa;background-color:#fafafa;width:100%;">
+                        <tbody>
+                        <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+                            <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                                <tbody>
+                                    <tr>
+                                    <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+                                        <tbody>
+                                            <tr>
+                                            <td style="width:300px;">
+                                                <a href="https://openstack.org" target="_blank">
+                                                <img height="auto" src="/openstack_integration/static/OpenStack-Logo-Horizontal.svg" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="300" />
+                                                </a>
+                                            </td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <!--[if mso | IE]></td></tr></table><![endif]-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" bgcolor="#e1e1e1" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                    <div style="background:#e1e1e1;background-color:#e1e1e1;margin:0px auto;max-width:600px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#e1e1e1;background-color:#e1e1e1;width:100%;">
+                        <tbody>
+                        <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:500px;" ><![endif]-->
+                            <div class="mj-column-px-500 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                                <tbody>
+                                    <tr>
+                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <div style="font-family:Montserrat;font-size:20px;font-style:italic;line-height:1;text-align:left;color:#626262;">Thank you for using our cloud</div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.3;text-align:left;color:#525252;">The invoice for ${ctx.bill_period} has been processed, and the balance was automatically deducted from your credit card.</div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.3;text-align:left;color:#525252;">A detailed breakdown of your usage is on the attached invoice.</div>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <!--[if mso | IE]></td></tr></table><![endif]-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" bgcolor="#e1e1e1" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                    <div style="background:#e1e1e1;background-color:#e1e1e1;margin:0px auto;max-width:600px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#e1e1e1;background-color:#e1e1e1;width:100%;">
+                        <tbody>
+                        <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:500px;" ><![endif]-->
+                            <div class="mj-column-px-500 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;">
+                                <tbody>
+                                    <tr>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;vertical-align:bottom;">
+                                            <div style="font-family:Montserrat;font-size:16px;font-style:italic;line-height:1;text-align:left;color:#626262;">Customer:</div>
+                                        </td>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;">
+                                            <div style="font-family:Montserrat;font-size:20px;font-style:italic;line-height:1;text-align:left;color:#626262;">${object.partner_id.name}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;vertical-align:bottom;">
+                                            <div style="font-family:Montserrat;font-size:16px;font-style:italic;line-height:1;text-align:left;color:#626262;">Invoice ID:</div>
+                                        </td>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;">
+                                            <div style="font-family:Montserrat;font-size:20px;font-style:italic;line-height:1;text-align:left;color:#626262;">${object.name}</div>
+                                        </td>
+                                    </tr>
+                                    % if ctx.project:
+                                    <tr>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;vertical-align:bottom;">
+                                            <div style="font-family:Montserrat;font-size:16px;font-style:italic;line-height:1;text-align:left;color:#626262;">Project name:</div>
+                                        </td>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;">
+                                            <div style="font-family:Montserrat;font-size:20px;font-style:italic;line-height:1;text-align:left;color:#626262;">${ctx.project.name}</div>
+                                        </td>
+                                    </tr>
+                                    % endif
+                                </tbody>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                                <tbody>
+                                    <tr>
+                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <table cellpadding="0" cellspacing="0" width="100%" border="0" style="color:#000000;font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none;">
+                                        <tr style="text-align:left;padding:15px 0;">
+                                            <td>Resource usage during ${ctx.bill_period}</td>
+                                            <td>$${"%.2f" % object.amount_untaxed}</td>
+                                        </tr>
+                                        <tr style="text-align:left;padding:15px 0;">
+                                            <td>Tax (GST 15%)</td>
+                                            <td>$${"%.2f" % object.amount_tax}</td>
+                                        </tr>
+                                        <tr style="text-align:left;padding:15px 0;">
+                                            <td>Subtotal</td>
+                                            <td>$${"%.2f" % object.amount_total}</td>
+                                        </tr>
+                                        <tr style="text-align:left;padding:15px 0;">
+                                            <td style="font-weight: 600;">Amount charged</td>
+                                            <td style="font-weight: 600;">$${"%.2f" % object.amount_total}</td>
+                                        </tr>
+                                        </table>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <!--[if mso | IE]></td></tr></table><![endif]-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                    <div style="margin:0px auto;max-width:600px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+                        <tbody>
+                        <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:500px;" ><![endif]-->
+                            <div class="mj-column-px-500 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                                <tbody>
+                                    <tr>
+                                    <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.3;text-align:center;color:#000000;">OpenStack</div>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <!--[if mso | IE]></td></tr></table><![endif]-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!--[if mso | IE]></td></tr></table><![endif]-->
+                </div>
+                </body>
+
+                % elif ctx.email_type == 'summary':
+
+                <head>
+                <title>
+                </title>
+                <!--[if !mso]><!-->
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <!--<![endif]-->
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <style type="text/css">
+                    #outlook a {
+                    padding: 0;
+                    }
+
+                    body {
+                    margin: 0;
+                    padding: 0;
+                    -webkit-text-size-adjust: 100%;
+                    -ms-text-size-adjust: 100%;
+                    }
+
+                    table,
+                    td {
+                    border-collapse: collapse;
+                    mso-table-lspace: 0pt;
+                    mso-table-rspace: 0pt;
+                    }
+
+                    img {
+                    border: 0;
+                    height: auto;
+                    line-height: 100%;
+                    outline: none;
+                    text-decoration: none;
+                    -ms-interpolation-mode: bicubic;
+                    }
+
+                    p {
+                    display: block;
+                    margin: 13px 0;
+                    }
+                </style>
+                <!--[if mso]>
+                        <noscript>
+                        <xml>
+                        <o:OfficeDocumentSettings>
+                        <o:AllowPNG/>
+                        <o:PixelsPerInch>96</o:PixelsPerInch>
+                        </o:OfficeDocumentSettings>
+                        </xml>
+                        </noscript>
+                        <![endif]-->
+                <!--[if lte mso 11]>
+                        <style type="text/css">
+                        .mj-outlook-group-fix { width:100% !important; }
+                        </style>
+                        <![endif]-->
+                <!--[if !mso]><!-->
+                <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet" type="text/css" />
+                <style type="text/css">
+                    @import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700);
+                </style>
+                <!--<![endif]-->
+                <style type="text/css">
+                    @media only screen and (min-width:480px) {
+                    .mj-column-per-100 {
+                        width: 100% !important;
+                        max-width: 100%;
+                    }
+
+                    .mj-column-px-500 {
+                        width: 500px !important;
+                        max-width: 500px;
+                    }
+                    }
+                </style>
+                <style media="screen and (min-width:480px)">
+                    .moz-text-html .mj-column-per-100 {
+                    width: 100% !important;
+                    max-width: 100%;
+                    }
+
+                    .moz-text-html .mj-column-px-500 {
+                    width: 500px !important;
+                    max-width: 500px;
+                    }
+                </style>
+                <style type="text/css">
+                    @media only screen and (max-width:480px) {
+                    table.mj-full-width-mobile {
+                        width: 100% !important;
+                    }
+
+                    td.mj-full-width-mobile {
+                        width: auto !important;
+                    }
+                    }
+                </style>
+                </head>
+
+                <body style="word-spacing:normal;background-color:#ffffff;">
+                <div style="background-color:#ffffff;">
+                    <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" bgcolor="#fafafa" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                    <div style="background:#fafafa;background-color:#fafafa;margin:0px auto;max-width:600px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#fafafa;background-color:#fafafa;width:100%;">
+                        <tbody>
+                        <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+                            <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                                <tbody>
+                                    <tr>
+                                    <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+                                        <tbody>
+                                            <tr>
+                                            <td style="width:300px;">
+                                                <a href="https://openstack.org" target="_blank">
+                                                <img height="auto" src="/openstack_integration/static/OpenStack-Logo-Horizontal.svg" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="300" />
+                                                </a>
+                                            </td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <!--[if mso | IE]></td></tr></table><![endif]-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" bgcolor="#e1e1e1" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                    <div style="background:#e1e1e1;background-color:#e1e1e1;margin:0px auto;max-width:600px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#e1e1e1;background-color:#e1e1e1;width:100%;">
+                        <tbody>
+                        <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:500px;" ><![endif]-->
+                            <div class="mj-column-px-500 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                                <tbody>
+                                    <tr>
+                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <div style="font-family:Montserrat;font-size:20px;font-style:italic;line-height:1;text-align:left;color:#626262;">Thank you for using our cloud</div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.3;text-align:left;color:#525252;">A summary of your resource usage for ${ctx.bill_period} has been processed.</div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.3;text-align:left;color:#525252;">It appears that you have usage, but your project credits or discounts have covered your costs. Attached is a detailed summary of your usage.</div>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <!--[if mso | IE]></td></tr></table><![endif]-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" bgcolor="#e1e1e1" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                    <div style="background:#e1e1e1;background-color:#e1e1e1;margin:0px auto;max-width:600px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#e1e1e1;background-color:#e1e1e1;width:100%;">
+                        <tbody>
+                        <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:500px;" ><![endif]-->
+                            <div class="mj-column-px-500 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;">
+                                <tbody>
+                                    <tr>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;vertical-align:bottom;">
+                                            <div style="font-family:Montserrat;font-size:16px;font-style:italic;line-height:1;text-align:left;color:#626262;">Customer:</div>
+                                        </td>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;">
+                                            <div style="font-family:Montserrat;font-size:20px;font-style:italic;line-height:1;text-align:left;color:#626262;">${object.partner_id.name}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;vertical-align:bottom;">
+                                            <div style="font-family:Montserrat;font-size:16px;font-style:italic;line-height:1;text-align:left;color:#626262;">Invoice ID:</div>
+                                        </td>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;">
+                                            <div style="font-family:Montserrat;font-size:20px;font-style:italic;line-height:1;text-align:left;color:#626262;">${object.name}</div>
+                                        </td>
+                                    </tr>
+                                    % if ctx.project:
+                                    <tr>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;vertical-align:bottom;">
+                                            <div style="font-family:Montserrat;font-size:16px;font-style:italic;line-height:1;text-align:left;color:#626262;">Project name:</div>
+                                        </td>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;">
+                                            <div style="font-family:Montserrat;font-size:20px;font-style:italic;line-height:1;text-align:left;color:#626262;">${ctx.project.name}</div>
+                                        </td>
+                                    </tr>
+                                    % endif
+                                </tbody>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <table cellpadding="0" cellspacing="0" width="100%" border="0" style="color:#000000;font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none;">
+                                        <tr style="text-align:left;padding:15px 0;">
+                                            <td>Resource usage during ${ctx.bill_period}</td>
+                                            <td>$${"%.2f" % ctx.usage_total}</td>
+                                        </tr>
+                                        <tr style="text-align:left;padding:15px 0;">
+                                            <td>Free Resources</td>
+                                            <td>$${"%.2f" % ctx.free_resource_total}</td>
+                                        </tr>
+                                        <tr style="text-align:left;padding:15px 0;">
+                                            <td>Discount and credits</td>
+                                            <td>$${"%.2f" % ctx.discount_total}</td>
+                                        </tr>
+                                        <tr style="text-align:left;padding:15px 0;">
+                                            <td style="font-weight: 600;">Amount due</td>
+                                            <td style="font-weight: 600;">$${"%.2f" % object.amount_total}</td>
+                                        </tr>
+                                        </table>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <!--[if mso | IE]></td></tr></table><![endif]-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                    <div style="margin:0px auto;max-width:600px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+                        <tbody>
+                        <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:500px;" ><![endif]-->
+                            <div class="mj-column-px-500 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                                <tbody>
+                                    <tr>
+                                    <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.3;text-align:center;color:#000000;">OpenStack</div>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <!--[if mso | IE]></td></tr></table><![endif]-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!--[if mso | IE]></td></tr></table><![endif]-->
+                </div>
+                </body>
+
+
+                % else:
+
+                <head>
+                <title>
+                </title>
+                <!--[if !mso]><!-->
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <!--<![endif]-->
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <style type="text/css">
+                    #outlook a {
+                    padding: 0;
+                    }
+
+                    body {
+                    margin: 0;
+                    padding: 0;
+                    -webkit-text-size-adjust: 100%;
+                    -ms-text-size-adjust: 100%;
+                    }
+
+                    table,
+                    td {
+                    border-collapse: collapse;
+                    mso-table-lspace: 0pt;
+                    mso-table-rspace: 0pt;
+                    }
+
+                    img {
+                    border: 0;
+                    height: auto;
+                    line-height: 100%;
+                    outline: none;
+                    text-decoration: none;
+                    -ms-interpolation-mode: bicubic;
+                    }
+
+                    p {
+                    display: block;
+                    margin: 13px 0;
+                    }
+                </style>
+                <!--[if mso]>
+                        <noscript>
+                        <xml>
+                        <o:OfficeDocumentSettings>
+                        <o:AllowPNG/>
+                        <o:PixelsPerInch>96</o:PixelsPerInch>
+                        </o:OfficeDocumentSettings>
+                        </xml>
+                        </noscript>
+                        <![endif]-->
+                <!--[if lte mso 11]>
+                        <style type="text/css">
+                        .mj-outlook-group-fix { width:100% !important; }
+                        </style>
+                        <![endif]-->
+                <!--[if !mso]><!-->
+                <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet" type="text/css" />
+                <style type="text/css">
+                    @import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700);
+                </style>
+                <!--<![endif]-->
+                <style type="text/css">
+                    @media only screen and (min-width:480px) {
+                    .mj-column-per-100 {
+                        width: 100% !important;
+                        max-width: 100%;
+                    }
+
+                    .mj-column-px-500 {
+                        width: 500px !important;
+                        max-width: 500px;
+                    }
+                    }
+                </style>
+                <style media="screen and (min-width:480px)">
+                    .moz-text-html .mj-column-per-100 {
+                    width: 100% !important;
+                    max-width: 100%;
+                    }
+
+                    .moz-text-html .mj-column-px-500 {
+                    width: 500px !important;
+                    max-width: 500px;
+                    }
+                </style>
+                <style type="text/css">
+                    @media only screen and (max-width:480px) {
+                    table.mj-full-width-mobile {
+                        width: 100% !important;
+                    }
+
+                    td.mj-full-width-mobile {
+                        width: auto !important;
+                    }
+                    }
+                </style>
+                </head>
+
+                <body style="word-spacing:normal;background-color:#212b17;">
+                <div style="background-color:#212b17;">
+                    <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" bgcolor="#fafafa" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                    <div style="background:#fafafa;background-color:#fafafa;margin:0px auto;max-width:600px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#fafafa;background-color:#fafafa;width:100%;">
+                        <tbody>
+                        <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+                            <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                                <tbody>
+                                    <tr>
+                                    <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+                                        <tbody>
+                                            <tr>
+                                            <td style="width:300px;">
+                                                <a href="https://openstack.org" target="_blank">
+                                                <img height="auto" src="/openstack_integration/static/OpenStack-Logo-Horizontal.svg" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="300" />
+                                                </a>
+                                            </td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <!--[if mso | IE]></td></tr></table><![endif]-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" bgcolor="#e1e1e1" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                    <div style="background:#e1e1e1;background-color:#e1e1e1;margin:0px auto;max-width:600px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#e1e1e1;background-color:#e1e1e1;width:100%;">
+                        <tbody>
+                        <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:500px;" ><![endif]-->
+                            <div class="mj-column-px-500 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                                <tbody>
+                                    <tr>
+                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <div style="font-family:Montserrat;font-size:20px;font-style:italic;line-height:1;text-align:left;color:#626262;">Thank you for using our cloud</div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.3;text-align:left;color:#525252;">The invoice for ${ctx.bill_period} has been processed, and is now due for payment.</div>
+                                    </td>
+                                    </tr>
+                                    <tr>
+                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.3;text-align:left;color:#525252;">A detailed breakdown of your usage is on the attached invoice, with remittance advice included.</div>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <!--[if mso | IE]></td></tr></table><![endif]-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" bgcolor="#e1e1e1" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                    <div style="background:#e1e1e1;background-color:#e1e1e1;margin:0px auto;max-width:600px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#e1e1e1;background-color:#e1e1e1;width:100%;">
+                        <tbody>
+                        <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:500px;" ><![endif]-->
+                            <div class="mj-column-px-500 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;">
+                                <tbody>
+                                    <tr>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;vertical-align:bottom;">
+                                            <div style="font-family:Montserrat;font-size:16px;font-style:italic;line-height:1;text-align:left;color:#626262;">Customer:</div>
+                                        </td>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;">
+                                            <div style="font-family:Montserrat;font-size:20px;font-style:italic;line-height:1;text-align:left;color:#626262;">${object.partner_id.name}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;vertical-align:bottom;">
+                                            <div style="font-family:Montserrat;font-size:16px;font-style:italic;line-height:1;text-align:left;color:#626262;">Invoice ID:</div>
+                                        </td>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;">
+                                            <div style="font-family:Montserrat;font-size:20px;font-style:italic;line-height:1;text-align:left;color:#626262;">${object.name}</div>
+                                        </td>
+                                    </tr>
+                                    % if ctx.project:
+                                    <tr>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;vertical-align:bottom;">
+                                            <div style="font-family:Montserrat;font-size:16px;font-style:italic;line-height:1;text-align:left;color:#626262;">Project name:</div>
+                                        </td>
+                                        <td align="left" style="font-size:0px;padding:3px 25px;word-break:break-word;">
+                                            <div style="font-family:Montserrat;font-size:20px;font-style:italic;line-height:1;text-align:left;color:#626262;">${ctx.project.name}</div>
+                                        </td>
+                                    </tr>
+                                    % endif
+                                </tbody>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                                <tbody>
+                                    <tr>
+                                    <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <table cellpadding="0" cellspacing="0" width="100%" border="0" style="color:#000000;font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;line-height:22px;table-layout:auto;width:100%;border:none;">
+                                        <tr style="text-align:left;padding:15px 0;">
+                                            <td>Resource usage during ${ctx.bill_period}</td>
+                                            <td>$${"%.2f" % object.amount_untaxed}</td>
+                                        </tr>
+                                        <tr style="text-align:left;padding:15px 0;">
+                                            <td>Tax (GST 15%)</td>
+                                            <td>$${"%.2f" % object.amount_tax}</td>
+                                        </tr>
+                                        <tr style="text-align:left;padding:15px 0;">
+                                            <td>Subtotal</td>
+                                            <td>$${"%.2f" % object.amount_total}</td>
+                                        </tr>
+                                        <tr style="text-align:left;padding:15px 0;">
+                                            <td style="font-weight: 600;">Amount due</td>
+                                            <td style="font-weight: 600;">$${"%.2f" % object.amount_total}</td>
+                                        </tr>
+                                        </table>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <!--[if mso | IE]></td></tr></table><![endif]-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+                    <div style="margin:0px auto;max-width:600px;">
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+                        <tbody>
+                        <tr>
+                            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+                            <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:500px;" ><![endif]-->
+                            <div class="mj-column-px-500 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                                <tbody>
+                                    <tr>
+                                    <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                        <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;line-height:1.3;text-align:center;color:#000000;">OpenStack</div>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                            <!--[if mso | IE]></td></tr></table><![endif]-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <!--[if mso | IE]></td></tr></table><![endif]-->
+                </div>
+                </body>
+
+                % endif
+                </html>
+
+
+
+            </field>
+            <field name="report_template" ref="openstack_integration.account_invoices"/>
+            <field name="report_name">Invoice_${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>
