@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- OpenStack tab extension on partner form -->
+        <record id="view_partner_openstack_project_form" model="ir.ui.view">
+            <field name="name">res.partner.openstack.project.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr='//page[@name="sales_purchases"]' position="after">
+                    <page
+                        string="OpenStack"
+                        groups="openstack_integration.group_openstack_user,openstack_integration.group_openstack_manager">
+                        <group>
+                            <field name="stripe_customer_id" string="Stripe Customer ID" />
+                            <field name="os_customer_group" string="Customer Group" />
+                            <field name="os_reseller" string="Reseller" />
+                            <field name="os_trial" string="Trial" />
+                            <field name="os_referral" string="Referral" />
+                            <field name="os_is_cloud_framework_agreement_partner" string="CFA Customer" />
+                        </group>
+                        <group>
+                            <field name="os_projects" string="Projects" context="{'default_owner': id}">
+                                <tree string="Projects">
+                                    <field name="enabled" />
+                                    <field name="name" />
+                                    <field name="os_id" />
+                                </tree>
+                            </field>
+                            <field name="os_project_contacts" string="Project Contacts" context="{'default_partner': id}">
+                                <tree string="Project Contacts">
+                                    <field name="project" />
+                                    <field name="contact_type" />
+                                </tree>
+                            </field>
+                            <field name="os_referral_codes" string="Referral Codes" context="{'default_partner': id}">
+                                <tree string="Support Subscriptions">
+                                    <field name="code" />
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

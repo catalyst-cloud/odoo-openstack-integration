@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Add (optionally visible) column for OS Project -->
+        <record id="view_invoice_tree" model="ir.ui.view">
+            <field name="name">account.invoice.tree (in openstack_integration)</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree" />
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr='//field[@name="invoice_date_due"]' position="before">
+                        <field
+                            name="os_project"
+                            string="OS Project"
+                            optional="hide"
+                        />
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <!-- Add project fields to an account move -->
+        <record id="view_move_form" model="ir.ui.view">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+                <data>
+
+                    <xpath expr='//page[@name="other_info"]' position="after">
+                        <page
+                            string="OpenStack"
+                            groups="openstack_integration.group_openstack_user,openstack_integration.group_openstack_manager">
+                            <group>
+                                <field name="os_project" string="OS Project" />
+                                <field name="os_is_cloud_framework_agreement_invoice" string="CFA Invoice" />
+                            </group>
+                        </page>
+                    </xpath>
+
+                    <xpath expr="//field[@name='product_id']" position="before">
+                        <field name="os_project" optional="hide" string="OS Project" groups="openstack_integration.group_openstack_user,openstack_integration.group_openstack_manager" />
+                    </xpath>
+
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>

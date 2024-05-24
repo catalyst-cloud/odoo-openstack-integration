@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- form view for a openstack volume_discount_range -->
+        <record id="view_openstack_volume_discount_range_form" model="ir.ui.view">
+            <field name="name">openstack.volume_discount_range.form</field>
+            <field name="model">openstack.volume_discount_range</field>
+            <field name="arch" type="xml">
+                <form string="OpenStack Volume Discount Range">
+                    <group col="4">
+                        <field name="discount_percent" />
+                        <field name="min" />
+                        <field name="use_max" />
+                        <field name="max" />
+                        <field name="customer_group" />
+                    </group>
+                    <group col="4">
+                        <field name="create_date" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- tree view for all openstack volume_discount_ranges -->
+        <record id="view_openstack_volume_discount_range_tree" model="ir.ui.view">
+            <field name="name">openstack.volume_discount_range.tree</field>
+            <field name="model">openstack.volume_discount_range</field>
+            <field name="arch" type="xml">
+                <tree string="OpenStack Volume Discount Ranges">
+                    <field name="customer_group" />
+                    <field name="min" />
+                    <field name="max" />
+                    <field name="discount_percent" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search functionality on volume_discount_ranges -->
+        <record id="view_openstack_volume_discount_range_filter" model="ir.ui.view">
+            <field name="name">openstack.volume_discount_range.select</field>
+            <field name="model">openstack.volume_discount_range</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Volume Discount Range">
+                    <field name="customer_group" />
+                </search>
+            </field>
+        </record>
+
+        <!-- action to open the openstack volume_discount_range list -->
+        <record id="action_openstack_volume_discount_range_form" model="ir.actions.act_window">
+            <field name="name">OpenStack Volume Discount Ranges</field>
+            <field name="res_model">openstack.volume_discount_range</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu item for openstack volume_discount_range -->
+        <menuitem
+            action="action_openstack_volume_discount_range_form"
+            id="menu_action_openstack_volume_discount_range_form"
+            parent="menu_openstack_discounts" sequence="3" />
+
+    </data>
+</odoo>

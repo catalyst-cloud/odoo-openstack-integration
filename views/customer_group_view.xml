@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- form view for a openstack customer_group -->
+        <record id="view_openstack_customer_group_form" model="ir.ui.view">
+            <field name="name">openstack.customer_group.form</field>
+            <field name="model">openstack.customer_group</field>
+            <field name="arch" type="xml">
+                <form string="OpenStack Customer Group">
+                    <group col="4">
+                        <field name="name" />
+                        <field name="pricelist" />
+                    </group>
+                    <group col="4">
+                        <field name="create_date" />
+                    </group>
+                    <group col="4">
+                        <field name="partners" widget="one2many_list"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- tree view for all openstack customer_groups -->
+        <record id="view_openstack_customer_group_tree" model="ir.ui.view">
+            <field name="name">openstack.customer_group.tree</field>
+            <field name="model">openstack.customer_group</field>
+            <field name="arch" type="xml">
+                <tree string="OpenStack Customer Groups">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search functionality on customer_groups -->
+        <record id="view_openstack_customer_group_filter" model="ir.ui.view">
+            <field name="name">openstack.customer_group.select</field>
+            <field name="model">openstack.customer_group</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Customer Group">
+                    <field name="name" />
+                    <field name="partners" />
+                    <field name="pricelist" />
+                </search>
+            </field>
+        </record>
+
+        <!-- action to open the openstack customer_group list -->
+        <record id="action_openstack_customer_group_form" model="ir.actions.act_window">
+            <field name="name">OpenStack Customer Groups</field>
+            <field name="res_model">openstack.customer_group</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Menu item for openstack customer_group -->
+        <menuitem
+            action="action_openstack_customer_group_form"
+            id="menu_action_openstack_customer_group_form"
+            parent="menu_openstack_main" sequence="2" />
+
+    </data>
+</odoo>
